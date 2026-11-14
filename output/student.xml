@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<student>
+    <id>1</id>
+    <name>Jonas Jonaitis</name>
+    <age>21</age>
+    <averageGrade>8.5</averageGrade>
+    <active>true</active>
+    <subjects>
+        <subject>
+            <name>Mathematics</name>
+            <credits>6</credits>
+        </subject>
+        <subject>
+            <name>Physics</name>
+            <credits>5</credits>
+        </subject>
+    </subjects>
+    <initial>J</initial>
+</student>
