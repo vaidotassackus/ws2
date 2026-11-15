@@ -8,6 +8,7 @@ import jakarta.xml.ws.Endpoint;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.CountDownLatch;
 
 /** Command-line entry point for the server and document generation. */
 public final class Application {
@@ -63,13 +64,14 @@ public final class Application {
         }
     }
 
-    private static void runServer() throws IOException {
+    private static void runServer() throws InterruptedException {
         Endpoint endpoint = Endpoint.publish(SERVICE_URL, new StudentServiceImpl());
+        Runtime.getRuntime().addShutdownHook(new Thread(endpoint::stop));
         System.out.println("SOAP service: " + SERVICE_URL);
         System.out.println("WSDL: " + SERVICE_URL + "?wsdl");
-        System.out.println("Press Enter to stop.");
+        System.out.println("Stop the process to stop the server.");
         try {
-            System.in.read();
+            new CountDownLatch(1).await();
         } finally {
             endpoint.stop();
         }

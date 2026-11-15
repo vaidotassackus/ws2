@@ -59,6 +59,25 @@ tasks.named('run', JavaExec) {
     workingDir = projectDir
 }
 
+[
+        generateDocuments: 'transform',
+        startServer: 'server',
+        callClient: 'client'
+].each { taskName, command ->
+    tasks.register(taskName, JavaExec) {
+        group = 'application'
+        description = "Runs the ${command} demonstration."
+        dependsOn tasks.named('classes')
+        classpath = sourceSets.main.runtimeClasspath
+        mainClass = application.mainClass
+        args command
+        workingDir = projectDir
+        if (command == 'server') {
+            standardInput = System.in
+        }
+    }
+}
+
 tasks.named('test', Test) {
     useJUnitPlatform()
 }
