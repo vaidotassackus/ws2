@@ -24,22 +24,38 @@ public class Subject {
         this.credits = credits;
     }
 
-    /** @return subject name */
+    /**
+     * Returns the subject name.
+     *
+     * @return subject name
+     */
     public String getName() {
         return name;
     }
 
-    /** @param name subject name */
+    /**
+     * Changes the subject name.
+     *
+     * @param name subject name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /** @return number of credits */
+    /**
+     * Returns the number of credits.
+     *
+     * @return number of credits
+     */
     public int getCredits() {
         return credits;
     }
 
-    /** @param credits number of credits */
+    /**
+     * Changes the number of credits.
+     *
+     * @param credits number of credits
+     */
     public void setCredits(int credits) {
         this.credits = credits;
     }

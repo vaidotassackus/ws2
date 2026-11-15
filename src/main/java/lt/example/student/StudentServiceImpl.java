@@ -9,6 +9,10 @@ import java.util.List;
         serviceName = "StudentService", portName = "StudentServicePort",
         targetNamespace = "https://example.lt/student")
 public class StudentServiceImpl implements StudentService {
+    /** Creates the in-memory service. */
+    public StudentServiceImpl() {
+    }
+
     /** {@inheritDoc} */
     @Override
     public Student getStudent(int id) {

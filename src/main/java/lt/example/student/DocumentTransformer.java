@@ -19,6 +19,10 @@ import java.nio.file.Path;
 
 /** Converts one student XML file to HTML and PDF using XSL stylesheets. */
 public class DocumentTransformer {
+    /** Creates a transformer for the bundled stylesheets. */
+    public DocumentTransformer() {
+    }
+
     /**
      * Converts XML to HTML with the bundled XSLT stylesheet.
      *

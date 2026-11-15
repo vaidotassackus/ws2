@@ -1,0 +1,77 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    wsimportTools
+}
+
+dependencies {
+    implementation 'com.sun.xml.ws:jaxws-rt:4.0.3'
+    implementation 'org.apache.xmlgraphics:fop:2.11'
+    wsimportTools 'com.sun.xml.ws:jaxws-tools:4.0.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = 'lt.example.student.Application'
+}
+
+def generatedClientDir = layout.buildDirectory.dir('generated/sources/wsimport/java')
+def wsdlFile = file('src/main/resources/wsdl/student-service.wsdl')
+def xsdFile = file('src/main/resources/wsdl/student-service.xsd')
+
+tasks.register('generateSoapClient', JavaExec) {
+    group = 'build'
+    description = 'Generates the SOAP client with the Metro wsimport tool.'
+    classpath = configurations.wsimportTools
+    mainClass = 'com.sun.tools.ws.WsImport'
+    inputs.files(wsdlFile, xsdFile)
+    outputs.dir(generatedClientDir)
+    doFirst {
+        generatedClientDir.get().asFile.mkdirs()
+    }
+    args '-keep', '-Xnocompile',
+            '-p', 'lt.example.student.client.generated',
+            '-s', generatedClientDir.get().asFile.absolutePath,
+            '-wsdllocation', '/wsdl/student-service.wsdl',
+            wsdlFile.absolutePath
+}
+
+sourceSets.main.java.srcDir(generatedClientDir)
+tasks.named('compileJava') {
+    dependsOn tasks.named('generateSoapClient')
+}
+
+tasks.named('run', JavaExec) {
+    standardInput = System.in
+    workingDir = projectDir
+}
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+}
+
+tasks.named('javadoc', Javadoc) {
+    dependsOn tasks.named('compileJava')
+    source = fileTree('src/main/java')
+    classpath += sourceSets.main.output
+    destinationDir = file('docs/javadoc')
+    options.encoding = 'UTF-8'
+    options.addStringOption('Xdoclint:all', '-quiet')
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('javadoc')
+}

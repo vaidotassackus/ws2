@@ -53,83 +53,147 @@ public class Student {
         this.subjects = new ArrayList<>(subjects);
     }
 
-    /** @return student identifier */
+    /**
+     * Returns the student identifier.
+     *
+     * @return student identifier
+     */
     public int getId() {
         return id;
     }
 
-    /** @param id student identifier */
+    /**
+     * Changes the student identifier.
+     *
+     * @param id student identifier
+     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /** @return full name */
+    /**
+     * Returns the full name.
+     *
+     * @return full name
+     */
     public String getName() {
         return name;
     }
 
-    /** @param name full name */
+    /**
+     * Changes the full name.
+     *
+     * @param name full name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /** @return age in years */
+    /**
+     * Returns the age in years.
+     *
+     * @return age in years
+     */
     public int getAge() {
         return age;
     }
 
-    /** @param age age in years */
+    /**
+     * Changes the age in years.
+     *
+     * @param age age in years
+     */
     public void setAge(int age) {
         this.age = age;
     }
 
-    /** @return average grade */
+    /**
+     * Returns the average grade.
+     *
+     * @return average grade
+     */
     public float getAverageGrade() {
         return averageGrade;
     }
 
-    /** @param averageGrade average grade */
+    /**
+     * Changes the average grade.
+     *
+     * @param averageGrade average grade
+     */
     public void setAverageGrade(float averageGrade) {
         this.averageGrade = averageGrade;
     }
 
-    /** @return whether the student is currently active */
+    /**
+     * Reports whether the student is active.
+     *
+     * @return whether the student is currently active
+     */
     public boolean isActive() {
         return active;
     }
 
-    /** @param active whether the student is currently active */
+    /**
+     * Changes the active state.
+     *
+     * @param active whether the student is currently active
+     */
     public void setActive(boolean active) {
         this.active = active;
     }
 
-    /** @return first letter of the given name */
+    /**
+     * Returns the first letter of the given name.
+     *
+     * @return first letter of the given name
+     */
     public char getInitial() {
         return initial;
     }
 
-    /** @param initial first letter of the given name */
+    /**
+     * Changes the first letter of the given name.
+     *
+     * @param initial first letter of the given name
+     */
     public void setInitial(char initial) {
         this.initial = initial;
     }
 
-    /** JAXB represents the Java {@code char} as one XML text character. @return initial as text */
+    /**
+     * Returns the Java {@code char} as one XML text character.
+     *
+     * @return initial as text
+     */
     @XmlElement(name = "initial")
     public String getInitialText() {
         return String.valueOf(initial);
     }
 
-    /** @param initialText one-character initial from XML */
+    /**
+     * Changes the initial using one XML text character.
+     *
+     * @param initialText one-character initial from XML
+     */
     public void setInitialText(String initialText) {
         this.initial = initialText == null || initialText.isEmpty() ? '\0' : initialText.charAt(0);
     }
 
-    /** @return subjects studied by the student */
+    /**
+     * Returns the subjects studied by the student.
+     *
+     * @return subjects studied by the student
+     */
     public List<Subject> getSubjects() {
         return subjects;
     }
 
-    /** @param subjects subjects studied by the student */
+    /**
+     * Changes the subjects studied by the student.
+     *
+     * @param subjects subjects studied by the student
+     */
     public void setSubjects(List<Subject> subjects) {
         this.subjects = new ArrayList<>(subjects);
     }
